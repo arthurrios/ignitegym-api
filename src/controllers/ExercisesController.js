@@ -2,6 +2,12 @@ const knex = require("../database");
 
 class ExercisesController {
   async index(request, response) {
+    const exercises = await knex("exercises")
+
+    return response.json(exercises)
+  }
+
+  async indexGroup(request, response) {
     const { group } = request.params;
 
     const exercises = await knex("exercises").where({ group }).orderBy("name");

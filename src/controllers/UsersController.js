@@ -7,13 +7,13 @@ class UsersController {
     const { name, email, password } = request.body;
 
     if (!name || !email || !password) {
-      throw new AppError("Informe todos os campos (nome, email e senha).");
+      throw new AppError("Enter all fields (name, email and password).");
     }
 
     const checkUserExists = await knex("users").where({ email }).first();
 
     if (checkUserExists) {
-      throw new AppError("Este e-mail já está em uso.");
+      throw new AppError("This email is already in use.");
     }
 
     const hashedPassword = await hash(password, 8);
